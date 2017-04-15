@@ -1,0 +1,7 @@
+# Binary
+*.o
+*.bin
+
+# KDevelop
+.kdev4/
+*.kdev4
