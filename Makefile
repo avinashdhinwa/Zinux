@@ -31,6 +31,9 @@ zinux.iso: zinux.bin
 	grub2-mkrescue --output $@ iso
 	rm -Rf iso/
 
+run: zinux.iso
+	VirtualBox --startvm Zinux
+
 install: zinux.bin
 	cp $< /boot/zinux.bin
 
