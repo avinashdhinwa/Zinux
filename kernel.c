@@ -9,9 +9,9 @@ void printf(const char *str)
         *(videoMemory + i) = (*(videoMemory + i) & 0xFF00) |  *str;
 }
 
-void kernelMain(void *multiboot, unsigned int magicNumber)
+void kernelMain(void *multiboot, uint32_t magicNumber)
 {
-    printf("Zinux");
+    printf("Zinux: Zi's unix clone");
 
     while(1);
 }
