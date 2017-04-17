@@ -6,7 +6,10 @@ CFLAGS = -m32 -nostdlib -fno-builtin -fno-exceptions -fno-leading-underscore
 ASFLAGS = --32
 LDFLAGS = -melf_i386
 
-objects = loader.o kernel.o
+objects = \
+	loader.o \
+	kernel.o \
+	tty.o
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
