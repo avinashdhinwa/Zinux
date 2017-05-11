@@ -28,7 +28,7 @@ void GDT_init(void)
     GDT_create(&GDT[GDT_ENTRY_NULL], 0, 0, 0);
     GDT_create(&GDT[GDT_ENTRY_UNUSED], 0, 0, 0);
     GDT_create(&GDT[GDT_ENTRY_CODE], 0, 6*1024*1024, 0x9A);     // ring 0 (kernel), code
-    GDT_create(&GDT[GDT_ENTRY_CODE], 0, 6*1024*1024, 0x92);     // ring 0 (kernel), data
+    GDT_create(&GDT[GDT_ENTRY_DATA], 0, 6*1024*1024, 0x92);     // ring 0 (kernel), data
 
     gdt_ptr_t gdtr;
     gdtr.size = (sizeof(GDT) - 1);
