@@ -10,7 +10,8 @@ objects = \
 	loader.o \
 	kernel.o \
 	tty.o \
-	gdt.o
+	gdt.o \
+	port.o
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -42,4 +43,4 @@ install: zinux.bin
 	cp $< /boot/zinux.bin
 
 clean:
-	rm -Rf *.o zinux.bin zinux.iso
+	rm -Rf $(objects) zinux.bin zinux.iso
