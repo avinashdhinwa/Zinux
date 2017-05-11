@@ -9,7 +9,8 @@ LDFLAGS = -melf_i386
 objects = \
 	loader.o \
 	kernel.o \
-	tty.o
+	tty.o \
+	gdt.o
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<

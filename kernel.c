@@ -2,6 +2,7 @@
 
 #include "vga.h"
 #include "tty.h"
+#include "gdt.h"
 
 void printf(const char *str)
 {
@@ -14,6 +15,8 @@ void printf(const char *str)
 
 void kernelMain(void *multiboot, uint32_t magicNumber)
 {
+    GDT_init();
+
     //printf("Zinux: Zi's unix clone");
     //TTY_init();
     //TTY_changeColor(COLOR_BLACK, COLOR_RED);
