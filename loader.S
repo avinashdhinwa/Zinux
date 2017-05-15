@@ -22,6 +22,20 @@ _stop:
     hlt
     jmp _stop
 
+.global GDT_flush
+.extern pGDT
+GDT_flush:
+    lgdt (pGDT)
+    movw $0x10, %ax
+    movw %ax, %ds
+    movw %ax, %es
+    movw %ax, %fs
+    movw %ax, %gs
+    movw %ax, %ss
+    ljmp $0x08, $_flush
+_flush:
+    ret
+
 .section .bss
 .space 2 * 1024 * 1024
 
