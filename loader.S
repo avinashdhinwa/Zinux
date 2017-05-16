@@ -36,6 +36,12 @@ GDT_flush:
 _flush:
     ret
 
+.global IDT_flush
+.extern pIDT
+IDT_flush:
+    lidt (pIDT)
+    ret
+
 .section .bss
 .space 2 * 1024 * 1024
 

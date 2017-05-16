@@ -33,7 +33,7 @@ void GDT_init(void)
     GDT_create(&GDT[GDT_ENTRY_CODE], 0, 0xFFFFFFFF, 0x9A, 0xCF);        // ring 0 (kernel), code
     GDT_create(&GDT[GDT_ENTRY_DATA], 0, 0xFFFFFFFF, 0x92, 0xCF);        // ring 0 (kernel), data
 
-    pGDT.size = (sizeof(GDT) - 1);
+    pGDT.size = sizeof(GDT) - 1;
     pGDT.address = (uint32_t)&GDT;
 
     GDT_flush();
