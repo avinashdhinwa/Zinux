@@ -17,15 +17,15 @@ loader:
     push %ebx
     call kernelMain
 
-_stop:
     cli
+_stop:
     hlt
     jmp _stop
 
 .global GDT_flush
-.extern pGDT
 GDT_flush:
-    lgdt (pGDT)
+    movl 4(%esp), %eax
+    lgdt (%eax)
     movw $0x10, %ax
     movw %ax, %ds
     movw %ax, %es
@@ -37,12 +37,12 @@ _flush:
     ret
 
 .global IDT_flush
-.extern pIDT
 IDT_flush:
-    lidt (pIDT)
+    movl 4(%esp), %eax
+    lidt (%eax)
     ret
 
 .section .bss
-.space 2 * 1024 * 1024
+.space 1 * 1024 * 1024
 
 kernel_stack:

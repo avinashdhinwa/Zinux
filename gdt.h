@@ -32,7 +32,6 @@ uint32_t GDT_getLimit(gdt_t *gdt);
 #define GDT_ENTRY_COUNT     3
 
 extern gdt_t GDT[GDT_ENTRY_COUNT];
-extern gdt_ptr_t pGDT;
 
 void GDT_init(void);
 uint16_t GDT_codeSegmentSelector(void);

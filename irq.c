@@ -3,9 +3,25 @@
 #include "port.h"
 #include "tty.h"
 
+void PIC_sendEOI(uint8_t irq)
+{
+	if(irq >= 8)
+		outb(PORT_PIC_MASTER_B,PIC_EOI);
+
+	outb(PORT_PIC_MASTER_A,PIC_EOI);
+}
+
 uint32_t IRQHandler(uint8_t irq, uint32_t esp)
 {
-    TTY_puts("INTERRUPT");
+    if (irq == 33)
+    {
+        /* Keyboard Handler */
+        inb(0x60); /* read keystroke so next interrupt will occur */
+        TTY_puts("KEYINT ");
+    }
+
+    /* Send EOI or we won't get further interrupts */
+    PIC_sendEOI(irq);
 
     return esp;
 }

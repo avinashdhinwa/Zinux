@@ -1,9 +1,8 @@
 #include "gdt.h"
 
 gdt_t GDT[GDT_ENTRY_COUNT];
-gdt_ptr_t pGDT;
 
-void GDT_flush();
+void GDT_flush(gdt_ptr_t *gdtr);
 
 void GDT_create(gdt_t *gdt, uint32_t base, uint32_t limit, uint8_t access, uint8_t flags)
 {
@@ -29,14 +28,15 @@ uint32_t GDT_getLimit(gdt_t *gdt)
 
 void GDT_init(void)
 {
+    gdt_ptr_t gdtr;
     GDT_create(&GDT[GDT_ENTRY_NULL], 0, 0, 0, 0);
     GDT_create(&GDT[GDT_ENTRY_CODE], 0, 0xFFFFFFFF, 0x9A, 0xCF);        // ring 0 (kernel), code
     GDT_create(&GDT[GDT_ENTRY_DATA], 0, 0xFFFFFFFF, 0x92, 0xCF);        // ring 0 (kernel), data
 
-    pGDT.size = sizeof(GDT) - 1;
-    pGDT.address = (uint32_t)&GDT;
+    gdtr.size = sizeof(GDT) - 1;
+    gdtr.address = (uint32_t)&GDT;
 
-    GDT_flush();
+    GDT_flush(&gdtr);
 }
 
 uint16_t GDT_codeSegmentSelector(void)
