@@ -5,7 +5,7 @@
 
 void PIC_sendEOI(uint8_t irq)
 {
-	if(irq >= 8)
+	if((irq-32) >= 8)
 		outb(PORT_PIC_MASTER_B,PIC_EOI);
 
 	outb(PORT_PIC_MASTER_A,PIC_EOI);
