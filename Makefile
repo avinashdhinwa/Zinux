@@ -36,7 +36,7 @@ zinux.iso: zinux.bin
 	echo '    multiboot /boot/zinux.bin' >> iso/boot/grub/grub.cfg
 	echo '    boot' >> iso/boot/grub/grub.cfg
 	echo '}' >> iso/boot/grub/grub.cfg
-	grub-mkrescue --output $@ iso
+	grub2-mkrescue --output $@ iso
 	rm -Rf iso/
 
 run: zinux.iso
