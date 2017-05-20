@@ -4,6 +4,8 @@
 #include <stdint.h>
 
 #define IRQ_BASE                0x20
+#define IRQ_TIMER               IRQ_BASE
+#define IRQ_KEYBOARD            IRQ_BASE + 0x01
 
 uint32_t IRQHandler(uint8_t irq, uint32_t esp);
 

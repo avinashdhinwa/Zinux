@@ -30,5 +30,5 @@ void kernelMain(void *multiboot, uint32_t magicNumber)
 
     TTY_setColor(COLOR_BLACK, COLOR_RED);
 
-    while(1) __asm__ ("hlt");
+    while(1) asm("hlt");
 }

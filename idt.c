@@ -27,12 +27,8 @@ void IDT_init(void)
     for(i = 0; i < IDT_ENTRY_COUNT; i++)
         IDT_create(&IDT[i], (uint32_t)IRQHandlerIgnore, codeSegment, idtGate);
 
-    IDT_create(&IDT[0x20 + 0], (uint32_t)IRQHandler00, codeSegment, idtGate);
-    IDT_create(&IDT[0x20 + 1], (uint32_t)IRQHandler01, codeSegment, idtGate);
-    IDT_create(&IDT[0x20 + 2], (uint32_t)IRQHandler00, codeSegment, idtGate);
-    IDT_create(&IDT[0x20 + 3], (uint32_t)IRQHandler00, codeSegment, idtGate);
-    IDT_create(&IDT[0x20 + 4], (uint32_t)IRQHandler00, codeSegment, idtGate);
-    IDT_create(&IDT[0x20 + 5], (uint32_t)IRQHandler00, codeSegment, idtGate);
+    IDT_create(&IDT[IRQ_BASE + 0], (uint32_t)IRQHandler00, codeSegment, idtGate);
+    IDT_create(&IDT[IRQ_BASE + 1], (uint32_t)IRQHandler01, codeSegment, idtGate);
 
     idt_ptr_t idtr;
     idtr.size = sizeof(IDT) - 1;

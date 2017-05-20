@@ -5,19 +5,19 @@
 
 void PIC_sendEOI(uint8_t irq)
 {
-	if((irq-32) >= 8)
-		outb(PORT_PIC_MASTER_B,PIC_EOI);
+    if((irq - IRQ_BASE) >= 8)
+        outb(PORT_PIC_MASTER_B, PIC_EOI);
 
-	outb(PORT_PIC_MASTER_A,PIC_EOI);
+    outb(PORT_PIC_MASTER_A, PIC_EOI);
 }
 
 uint32_t IRQHandler(uint8_t irq, uint32_t esp)
 {
-    if (irq == 33)
+    if (irq == IRQ_KEYBOARD)
     {
         /* Keyboard Handler */
         inb(0x60); /* read keystroke so next interrupt will occur */
-        TTY_puts("KEYINT ");
+        TTY_puts("KEYINT\n");
     }
 
     /* Send EOI or we won't get further interrupts */
@@ -39,9 +39,6 @@ void IRQ_init(void)
     /* Master/Slave communication setup */
     outb(PORT_PIC_MASTER_B, 0x04);
     outb(PORT_PIC_SLAVE_B, 0x02);
-
-    //outb(PORT_PIC_MASTER_B, 0x05);  // Set as Master
-    //outb(PORT_PIC_SLAVE_B, 0x01);   // Set as Slave
 
     outb(PORT_PIC_MASTER_B, 0x01);
     outb(PORT_PIC_SLAVE_B, 0x01);
