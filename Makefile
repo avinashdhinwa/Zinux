@@ -14,7 +14,8 @@ objects = \
 	port.o \
 	interrupts.o \
 	idt.o \
-	irq.o
+	irq.o \
+	keyboard.o
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<

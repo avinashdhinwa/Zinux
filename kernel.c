@@ -5,6 +5,7 @@
 #include "gdt.h"
 #include "idt.h"
 #include "irq.h"
+#include "keyboard.h"
 
 void kernelMain(void *multiboot, uint32_t magicNumber)
 {
@@ -14,6 +15,8 @@ void kernelMain(void *multiboot, uint32_t magicNumber)
     IDT_init();
     IRQ_init();
     IRQ_enable();
+
+    KEYBOARD_init();
 
     //printf("Zinux: Zi's unix clone");
     //TTY_init();

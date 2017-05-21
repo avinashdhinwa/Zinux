@@ -2,6 +2,7 @@
 
 #include "port.h"
 #include "tty.h"
+#include "keyboard.h"
 
 void PIC_sendEOI(uint8_t irq)
 {
@@ -13,11 +14,12 @@ void PIC_sendEOI(uint8_t irq)
 
 uint32_t IRQHandler(uint8_t irq, uint32_t esp)
 {
+    /* Keyboard Handler */
     if (irq == IRQ_KEYBOARD)
     {
-        /* Keyboard Handler */
-        inb(0x60); /* read keystroke so next interrupt will occur */
-        TTY_puts("KEYINT\n");
+        inb(0x60);
+        uint8_t key = inb(0x60);
+        handleKeyPress(key);
     }
 
     /* Send EOI or we won't get further interrupts */
